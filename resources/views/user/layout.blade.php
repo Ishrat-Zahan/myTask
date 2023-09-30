@@ -57,7 +57,7 @@
     </div>
 
     <div id="form-container">
-        <!-- This is where the dynamic form fields will be inserted -->
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -76,11 +76,10 @@
 
 
     <script>
-        
         $(document).ready(function() {
 
             var url = "{{url('authCheck')}}"
-            
+
             $("#category_id").change(function() {
                 $.ajax({
                     url: url,
@@ -88,25 +87,29 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.isAuthenticated) {
-                           
+
                             let id = $("#category_id").val();
                             $('#form-container').html(form(id));
                         } else {
-                           
-                            alert(response.message); 
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: response.message,
+                               
+                               
+                            })
+
                         }
                     },
-                    // error: function() {
-                    //     console.error('Error checking authentication status');
-                    // }
+
                 });
             });
         });
 
-            function form(id) {
+        function form(id) {
 
-                let formHtml = '';
-                formHtml += `
+            let formHtml = '';
+            formHtml += `
 
 <section class="vh-100 gradient-custom">
 <div class="container py-5 h-100">
@@ -159,17 +162,17 @@
                                 
                                 <div class="row">`
 
-                if (id != 1) {
-                    formHtml +=
-                        `<div class="col-md-4 mb-4">
+            if (id != 1) {
+                formHtml +=
+                    `<div class="col-md-4 mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="ssc_result" name="ssc_result" class="form-control form-control-lg" />
                                             <label class="form-label" for="firstName">Result of SSC</label>
                                         </div>
 
                                     </div>`
-                    if (id != 2) {
-                        formHtml += `
+                if (id != 2) {
+                    formHtml += `
                                     <div class="col-md-4 mb-4">
 
                                         <div class="form-outline">
@@ -178,10 +181,10 @@
                                         </div>
 
                                     </div>`
-                    }
                 }
-                formHtml +=
-                    ` <div class="col-md-4 mb-4">
+            }
+            formHtml +=
+                ` <div class="col-md-4 mb-4">
 
                                         <div class="form-outline">
                                             <input type="date" id="date" name="date" class="form-control form-control-lg" />
@@ -245,9 +248,9 @@
 </section>
 `;
 
-                return formHtml;
+            return formHtml;
 
-            }
+        }
     </script>
 </body>
 
