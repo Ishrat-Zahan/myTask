@@ -476,7 +476,7 @@
 
     <script src="{{ asset('assets/js/dashboard_init.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
 
 

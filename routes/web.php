@@ -57,6 +57,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
     Route::get("/getForm/{id}",[HomeController::class, 'getForm']);
     Route::post("/formSubmit",[HomeController::class, 'formSubmit'])->name('formSubmit');
+    Route::get("/authCheck",[HomeController::class, 'checkAuthentication']);
+ 
+
 
 
 

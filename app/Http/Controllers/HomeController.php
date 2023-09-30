@@ -7,6 +7,7 @@ use App\Models\Honsform;
 use App\Models\Hscform;
 use App\Models\Sscform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,25 +28,6 @@ class HomeController extends Controller
     public function formSubmit(Request $request)
     {
 
-        // $data = [
-        //     'category_id' => $request->category_id,
-        //     'name' => $request->name,
-        //     'father_name' => $request->father_name,
-        //     'mother_name' => $request->mother_name,
-        //     'ssc_result' => $request->ssc_result,
-        //     'hsc_result' => $request->hsc_result,
-        //     'date' => $request->date,
-        //     'gender' => $request->gender,
-        //     'group' => $request->group,
-        // ];
-
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     $path = $file->store('uploads');
-        //     $data['image'] = $path;
-        // }
-
-        // dd($data);
 
         if ($request->category_id == 1) {
 
@@ -112,5 +94,20 @@ class HomeController extends Controller
 
             Honsform::create($data);
         }
+    }
+
+
+    public function checkAuthentication(Request $request)
+    {
+        if (Auth::check()) {
+            $response = ['isAuthenticated' => true];
+        } else {
+            $response = [
+                'isAuthenticated' => false,
+                'message' => 'Please Log in first', 
+            ];
+        }
+
+        return response()->json($response);
     }
 }
